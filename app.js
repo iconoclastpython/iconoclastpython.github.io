@@ -11,16 +11,17 @@ function compile(str, path) {
   .set('filename', path)
   .use(nib())
 }
+
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jade')
 app.use(express.logger('dev'))
 app.use(stylus.middleware(
-  { src: __dirname + '/public'
-  , compile: compile
+  { src: __dirname + '/public',
+    compile: compile
   }
 ))
 app.use(express.static(__dirname + '/public'))
-app.get('/', function (req, res) {
+app.get('/', function (res) {
   res.render('index',
   { title : 'Home' }
   )
